@@ -69,3 +69,28 @@ class RatingViewSet(PermissionMixin, ModelViewSet):
         else:
             permissions = [AllowAny]
         return [permission() for permission in permissions]
+
+# [Unit]
+# Description=gunicorn daemon
+# Requires=gunicorn.socket
+# After=network.target
+
+# [Service]
+# User=sultanhoja228
+# Group=www-data
+# WorkingDirectory=/home/sultanhoja228/jetkir
+# ExecStart=/home/sultanhoja228/jetkir/venv/bin/gunicorn \
+#           --access-logfile - \
+#           --workers 3 \
+#           --bind unix:/run/gunicorn.sock \
+#           main.wsgi:application
+
+# [Install]
+# WantedBy=multi-user.target
+
+
+# ALTER ROLE sultanhoja228 SET client_encoding TO 'utf8';
+# ALTER ROLE sultanhoja228 SET default_transaction_isolation TO 'read committed';
+# ALTER ROLE sultanhoja228 SET timezone TO 'UTC';
+
+# GRANT ALL PRIVILEGES ON DATABASE jetkir TO sultanhoja228;
